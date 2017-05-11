@@ -17,6 +17,8 @@ public class Vehicle {
     
     private String image;
 
+    private String brand;
+
     private Double price;
 
     public String getId() {
@@ -37,6 +39,10 @@ public class Vehicle {
 
     public String getImage() {
         return image;
+    }
+
+    public String getBrand() {
+        return brand;
     }
 
     public Double getPrice() {

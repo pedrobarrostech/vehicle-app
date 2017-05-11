@@ -12,7 +12,9 @@ import { VehicleService } from '../common/_services/vehicle.service';
 export class VehiclesComponent implements OnInit {
 
   private vehicles = [];
+  private filteredVehicles = [];
   private isLoading = true;
+  private showAddForm = false;
 
   private vehicle = {};
   private isEditing = false;
@@ -47,7 +49,10 @@ export class VehiclesComponent implements OnInit {
     this._vehicleService.getAll().subscribe(
       data => this.vehicles = data,
       error => console.log(error),
-      () => this.isLoading = false
+      () => {
+        this.isLoading = false;
+        this.assignCopy();
+      }
     );
   }
 
@@ -55,8 +60,10 @@ export class VehiclesComponent implements OnInit {
     this._vehicleService.add(this.addVehicleForm.value).subscribe(
       res => {
         const newVehicle = res;
+        this.showAddForm = false;
         this.vehicles.push(newVehicle);
         this.addVehicleForm.reset();
+        this.assignCopy();
         this.sendInfoMsg('Veículo adicionado com sucesso.', 'success');
       },
       error => console.log(error)
@@ -75,13 +82,12 @@ export class VehiclesComponent implements OnInit {
     this.getVehicles();
   }
 
-
-
   editVehicle(vehicle) {
     this._vehicleService.update(vehicle).subscribe(
       res => {
         this.isEditing = false;
         this.vehicle = vehicle;
+        this.assignCopy();
         this.sendInfoMsg('Veículo editado com sucesso.', 'success');
       },
       error => console.log(error)
@@ -94,6 +100,7 @@ export class VehiclesComponent implements OnInit {
         res => {
           const pos = this.vehicles.map(item => { return item.id }).indexOf(vehicle.id);
           this.vehicles.splice(pos, 1);
+          this.assignCopy();
           this.sendInfoMsg('Veículo deletado com sucesso.', 'success');
         },
         error => console.log(error)
@@ -106,5 +113,23 @@ export class VehiclesComponent implements OnInit {
     this.infoMsg.type = type;
     window.setTimeout(() => this.infoMsg.body = '', time);
   }
+
+  assignCopy() {
+    this.filteredVehicles = Object.assign([], this.vehicles);
+  }
+
+  filterItem(value) {
+    if (!value) {
+      this.assignCopy();
+    }
+    this.filteredVehicles = Object.assign([], this.vehicles).filter(
+        item => item.plate.toLowerCase().indexOf(value.toLowerCase()) > -1
+    )
+  }
+
+  showForm(value) {
+    this.showAddForm = value;
+  }
+
 
 }

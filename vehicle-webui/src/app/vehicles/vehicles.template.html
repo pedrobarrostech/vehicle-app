@@ -1,11 +1,11 @@
 <div class="container">
   <div class="form-group row">
     <div class="col-sm-9">
-      <button class="btn btn-primary">Novo carro</button>
+      <button class="btn btn-primary" (click)="showForm(true)">Novo carro</button>
     </div>
     <div class="col-sm-3">
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Buscar">
+        <input type="text" #search class="form-control" (input)="filterItem(search.value)" placeholder="Buscar">
         <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
       </div>
     </div>
@@ -29,14 +29,14 @@
       </tr>
     </tbody>
     <tbody *ngIf="!isEditing">
-      <tr *ngFor="let vehicle of vehicles">
+      <tr *ngFor="let vehicle of filteredVehicles">
         <td class="text-center"><input type="checkbox" /></td>
-        <td>{{vehicle.plate}}</td>
-        <td>{{vehicle.model}}</td>
-        <td>{{vehicle.brand}}</td>
-        <td>{{vehicle.image}}</td>
-        <td>{{vehicle.fuel}}</td>
-        <td class="text-right">{{vehicle.price}}</td>
+        <td>{{ vehicle.plate }}</td>
+        <td>{{ vehicle.model }}</td>
+        <td>{{ vehicle.brand }}</td>
+        <td>{{ vehicle.image }}</td>
+        <td>{{ vehicle.fuel }}</td>
+        <td class="text-right">{{ vehicle.price }}</td>
         <td class="text-center">
           <button class="btn btn-sm btn-primary" (click)="enableEditing(vehicle)"><i class="fa fa-pencil"></i></button>
           <button class="btn btn-sm btn-primary" (click)="deleteVehicle(vehicle)"><i class="fa fa-trash"></i></button>
@@ -105,7 +105,7 @@
     </ul>
   </nav>
 
-  <div *ngIf="showFormAdd">
+  <div *ngIf="showAddForm">
     <div class="card">
       <h4 class="card-header">Adicionar carro</h4>
       <div class="card-block">
