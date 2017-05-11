@@ -57,7 +57,7 @@ export class VehiclesComponent implements OnInit {
         const newVehicle = res;
         this.vehicles.push(newVehicle);
         this.addVehicleForm.reset();
-        this.sendInfoMsg('Vehicle added successfully.', 'success');
+        this.sendInfoMsg('Veículo adicionado com sucesso.', 'success');
       },
       error => console.log(error)
     );
@@ -71,8 +71,7 @@ export class VehiclesComponent implements OnInit {
   cancelEditing() {
     this.isEditing = false;
     this.vehicle = {};
-    this.sendInfoMsg('Vehicle editing cancelled.', 'warning');
-    // reload the vehicles to reset the editing
+    this.sendInfoMsg('Edição do veículo cancelada.', 'warning');
     this.getVehicles();
   }
 
@@ -83,19 +82,19 @@ export class VehiclesComponent implements OnInit {
       res => {
         this.isEditing = false;
         this.vehicle = vehicle;
-        this.sendInfoMsg('Vehicle edited successfully.', 'success');
+        this.sendInfoMsg('Veículo editado com sucesso.', 'success');
       },
       error => console.log(error)
     );
   }
 
   deleteVehicle(vehicle) {
-    if (window.confirm('Are you sure you want to permanently delete this Vehicle?')) {
+    if (window.confirm('Você tem certeza que deseja deletar permanentemente esse veículo?')) {
       this._vehicleService.remove(vehicle).subscribe(
         res => {
-          const pos = this.vehicles.map(vehicle => { return vehicle.id }).indexOf(vehicle.id);
+          const pos = this.vehicles.map(item => { return item.id }).indexOf(vehicle.id);
           this.vehicles.splice(pos, 1);
-          this.sendInfoMsg('Vehicle deleted successfully.', 'success');
+          this.sendInfoMsg('Veículo deletado com sucesso.', 'success');
         },
         error => console.log(error)
       );
