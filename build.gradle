@@ -1,0 +1,30 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.4.BUILD-SNAPSHOT'
+	}
+	repositories {
+    jcenter()
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'eclipse'
+  apply plugin: 'idea'
+  apply plugin: 'org.springframework.boot'
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+
+  repositories {
+    jcenter()
+    mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+}

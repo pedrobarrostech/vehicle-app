@@ -1,0 +1,8 @@
+rootProject.name = 'vehicle'
+include ':vehicle-core'
+include ':vehicle-rest'
+include ':vehicle-data'
+
+project(':vehicle-core').projectDir = "$rootDir/vehicle-core" as File
+project(':vehicle-rest').projectDir = "$rootDir/vehicle-rest" as File
+project(':vehicle-data').projectDir = "$rootDir/vehicle-data" as File
