@@ -4,8 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { AuthGuard } from '../common/_guards/auth.guard';
-import { AuthenticationService } from '../common/_services/authentication.service';
 import { VehicleService } from '../common/_services/vehicle.service';
 
 const MODULES = [
@@ -16,17 +14,11 @@ const MODULES = [
   ReactiveFormsModule
 ];
 
-const PIPES = [
-  // put pipes here
-];
+const PIPES = [];
 
-const COMPONENTS = [
-  // put shared components here
-];
+const COMPONENTS = [];
 
 const SERVICES = [
-  AuthGuard,
-  AuthenticationService,
   VehicleService
 ]
 

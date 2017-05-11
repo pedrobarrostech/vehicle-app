@@ -1,0 +1,13 @@
+.container {
+    padding-top:25px;
+    width:990px;
+}
+
+.top {
+    padding-bottom: 25px;
+}
+
+.btn-primary {
+    background-color: #4ABA58;
+    border: 1px solid  #4ABA58;
+}
